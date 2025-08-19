@@ -107,8 +107,16 @@ export default function App() {
     setSubmitStatus('idle');
     setSubmitMessage('');
     
+    // Add timeout for better UX
+    const timeoutId = setTimeout(() => {
+      setIsSubmitting(false);
+      setSubmitStatus('error');
+      setSubmitMessage('Request timed out. Please check your connection and try again.');
+    }, 10000); // 10 second timeout
+    
     try {
       const result = await submitEmail(email.trim());
+      clearTimeout(timeoutId);
       
       if (result.success) {
         setSubmitStatus('success');
@@ -119,6 +127,7 @@ export default function App() {
         setSubmitMessage(result.error || 'Something went wrong. Please try again.');
       }
     } catch (error) {
+      clearTimeout(timeoutId);
       setSubmitStatus('error');
       setSubmitMessage('An unexpected error occurred. Please try again.');
     } finally {
@@ -193,21 +202,6 @@ export default function App() {
               </Button>
             </div>
             
-            {/* Status Message */}
-            {submitStatus !== 'idle' && (
-              <div className={`flex items-center gap-3 p-4 md:p-5 rounded-lg md:rounded-xl text-sm md:text-base ${
-                submitStatus === 'success' 
-                  ? 'bg-green-50 text-green-700 border border-green-200' 
-                  : 'bg-red-50 text-red-700 border border-red-200'
-              }`}>
-                {submitStatus === 'success' ? (
-                  <CheckCircle className="w-4 h-4 md:w-5 md:h-5" />
-                ) : (
-                  <AlertCircle className="w-4 h-4 md:w-5 md:h-5" />
-                )}
-                <span>{submitMessage}</span>
-              </div>
-            )}
           </form>
 
           {/* Footer */}
@@ -220,6 +214,22 @@ export default function App() {
             <span>Follow {CONFIG.brand.socialHandle} for updates</span>
             <ArrowUpRight className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
           </a>
+
+          {/* Status Message */}
+          {submitStatus !== 'idle' && (
+            <div className={`flex items-center gap-3 p-4 md:p-5 rounded-lg md:rounded-xl text-sm md:text-base mt-4 ${
+              submitStatus === 'success' 
+                ? 'bg-green-50 text-green-700 border border-green-200' 
+                : 'bg-red-50 text-red-700 border border-red-200'
+            }`}>
+              {submitStatus === 'success' ? (
+                <CheckCircle className="w-4 h-4 md:w-5 md:h-5" />
+              ) : (
+                <AlertCircle className="w-4 h-4 md:w-5 md:h-5" />
+              )}
+              <span>{submitMessage}</span>
+            </div>
+          )}
         </div>
       </div>
 

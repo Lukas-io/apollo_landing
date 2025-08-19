@@ -1,0 +1,21 @@
+{
+  "name": "7DayLovers - 7 Days to Find Real Love",
+  "short_name": "7DayLovers",
+  "description": "No endless swiping. No fake profiles. Just authentic connections with a ticking clock.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#7c3aed",
+  "icons": [
+    {
+      "src": "/logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
