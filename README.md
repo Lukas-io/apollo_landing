@@ -1,6 +1,6 @@
-# 7DayLovers Landing Page
+# 7dayslove Landing Page
 
-A modern landing page for the 7DayLovers app with email collection functionality using Supabase.
+A modern landing page for the 7 Days Love app with email collection functionality using Supabase.
 
 ## Features
 

@@ -8,7 +8,7 @@ import { submitEmail } from './lib/supabase';
 // Configuration object for easy editing
 const CONFIG = {
   brand: {
-    name: "7DayLovers",
+    name: "7 Days Love",
     tagline: "7 Days to Find Real Love",
     description: "Your account deletes after 7 days. Either you find your person, or you start the journey again. The pressure creates magic ✨",
     socialHandle: "@lukasiuu",
@@ -202,7 +202,7 @@ export default function App() {
               </Button>
             </div>
             
-          </form>
+         </form>
 
           {/* Footer */}
           <a 

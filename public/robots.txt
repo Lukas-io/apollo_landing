@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://7daylovers.com/sitemap.xml
+Sitemap: https://7dayslove.com/sitemap.xml
