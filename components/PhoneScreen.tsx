@@ -112,7 +112,7 @@ function PhoneModel({ videoTexture }: { videoTexture: THREE.VideoTexture }) {
         {/* Video screen overlay with rounded corners */}
         {videoTexture && roundedMaterial && (
             <mesh 
-              position={[0, 0.0007, 0.004]}
+              position={[0, 0.0007, 0.0038]}
               scale={[0.77, 0.8, 0.8]}
               castShadow
               receiveShadow
