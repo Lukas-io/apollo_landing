@@ -24,13 +24,20 @@ export default defineConfig(({ mode }) => ({
           vendor: ['react', 'react-dom'],
           three: ['three', '@react-three/fiber', '@react-three/drei'],
           ui: ['@radix-ui/react-slot', '@radix-ui/react-switch', 'lucide-react']
+        },
+        assetFileNames: (assetInfo) => {
+          if (assetInfo.name?.endsWith('.js')) {
+            return 'assets/[name]-[hash].js';
+          }
+          return 'assets/[name]-[hash].[ext]';
         }
       }
     },
     minify: 'terser',
     target: 'es2020',
     sourcemap: false,
-    chunkSizeWarningLimit: 1000
+    chunkSizeWarningLimit: 1000,
+    assetsInlineLimit: 0
   },
   optimizeDeps: {
     include: ['react', 'react-dom', 'three']

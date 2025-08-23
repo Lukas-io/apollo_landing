@@ -11,9 +11,12 @@ if ('serviceWorker' in navigator) {
         console.log('SW registered: ', registration);
       })
       .catch((registrationError) => {
-        console.log('SW registration failed: ', registrationError);
+        console.warn('SW registration failed: ', registrationError);
+        // Don't let service worker errors break the app
       });
   });
+} else {
+  console.log('Service Worker not supported');
 }
 
 ReactDOM.createRoot(document.getElementById('root')!).render(

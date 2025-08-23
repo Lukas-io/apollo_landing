@@ -82,7 +82,7 @@ function PhoneModel({ videoTexture }: { videoTexture: THREE.VideoTexture }) {
 
   useEffect(() => {
     if (videoTexture) {
-      const material = createRoundedVideoMaterial(videoTexture, 0.22); // iOS-style corner radius
+      const material = createRoundedVideoMaterial(videoTexture, 0.25); // iOS-style corner radius
       setRoundedMaterial(material);
 
       return () => {
@@ -112,7 +112,7 @@ function PhoneModel({ videoTexture }: { videoTexture: THREE.VideoTexture }) {
         {/* Video screen overlay with rounded corners */}
         {videoTexture && roundedMaterial && (
             <mesh 
-              position={[0, 0.0007, 0.0035]} 
+              position={[0, 0.0007, 0.004]}
               scale={[0.77, 0.8, 0.8]}
               castShadow
               receiveShadow
@@ -131,6 +131,19 @@ export function PhoneScreen() {
   const canvasRef = useRef<HTMLDivElement>(null);
   const [videoTexture, setVideoTexture] = useState<THREE.VideoTexture | null>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Check if device is mobile
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   // Intersection Observer for lazy loading
   useEffect(() => {
@@ -205,7 +218,8 @@ export function PhoneScreen() {
                 width: '100%',
                 height: '100%',
                 borderRadius: '8px',
-                overflow: 'hidden'
+                overflow: 'hidden',
+                pointerEvents: isMobile ? 'none' : 'auto' // Only disable on mobile
               }}
               gl={{
                 antialias: true,
@@ -217,6 +231,8 @@ export function PhoneScreen() {
                 failIfMajorPerformanceCaveat: false
               }}
               shadows
+              onTouchStart={isMobile ? (e) => e.stopPropagation() : undefined} // Only prevent on mobile
+              onTouchMove={isMobile ? (e) => e.stopPropagation() : undefined} // Only prevent on mobile
           >
             {/* Bright ambient lighting for overall visibility */}
             <ambientLight intensity={1.0} />
@@ -278,6 +294,8 @@ export function PhoneScreen() {
                 enableZoom={false}
                 enablePan={false}
                 autoRotate={false}
+                enableRotate={!isMobile} // Disable rotation on mobile
+                enableDamping={false} // Disable damping on mobile
                 maxPolarAngle={Math.PI / 2}
                 minPolarAngle={Math.PI / 2}
                 maxAzimuthAngle={Math.PI / 2}
