@@ -141,10 +141,10 @@ export default function App() {
 
   return (
     <div 
-      className={`min-h-screen md:h-screen overflow-y-auto overflow-x-hidden ${CONFIG.colors.light.rightSide} flex flex-col md:flex-row items-start md:items-center justify-center gap-6 md:gap-12 transition-colors duration-500`} 
+      className={`min-h-screen md:h-screen overflow-y-auto overflow-x-hidden ${CONFIG.colors.light.rightSide} flex flex-col md:flex-row items-start md:items-center justify-center gap-6 md:gap-12 transition-colors duration-500`}
       style={{ fontFamily: 'var(--font-sans)' }}
     >
-      <div className="max-w-[1100px] mx-auto p-6 font-sans flex flex-col items-center justify-center min-h-screen w-full">
+      <div className="max-w-[1000px] mx-auto p-6 font-sans flex flex-col items-center justify-center min-h-screen w-full">
         <main className="flex items-center gap-16 md:gap-24 w-full justify-center md:flex-row flex-col">
       {/* Left Side - Content */}
       <div className="md:w-[50%] w-full max-w-[450px] text-center md:text-left flex flex-col justify-center items-center md:items-start px-0 md:px-0 py-12 md:py-0">
@@ -265,22 +265,12 @@ export default function App() {
           {/*</div>*/}
 
       {/* Right Side - Phone Mockup */}
-      <div className={`w-full max-w-[350px] flex-none mt-6 md:mt-0 flex flex-col items-center justify-center px-0 md:px-0 py-8 md:py-16 transition-all duration-500 overflow-hidden`}>
+      <div className={`w-full max-w-[400px] mt-6 md:mt-0`}>
 
+        <div className="relative animate-float w-[400px] h-[1000px]">
+          {/* Immersive 3D iPhone - No constraining frame */}
+          <PhoneScreen  />
 
-        <div className="relative animate-float">
-          {/* iPhone Frame */}
-          <div className="w-72 h-[580px] bg-black rounded-[2.5rem] p-[3px] shadow-2xl hover:shadow-3xl transition-shadow duration-500">
-            <PhoneScreen timeLeft={timeLeft} />
-          </div>
-
-          {/* Floating Hearts */}
-          <div className="absolute -top-2 -right-2 text-pink-400 opacity-60">
-            <Heart className="w-5 h-5 fill-current" />
-          </div>
-          <div className="absolute -bottom-2 -left-2 text-purple-400 opacity-60">
-            <Heart className="w-4 h-4 fill-current" />
-          </div>
         </div>
       </div>
         </main>
