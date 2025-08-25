@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import { Button } from './components/ui/button';
 import { Input } from './components/ui/input';
 import { PhoneScreen } from './components/PhoneScreen';
@@ -301,7 +301,9 @@ function LandingPage() {
   );
 }
 
-export default function App() {
+function AppRoutes() {
+  const navigate = useNavigate();
+  
   return (
     <Routes>
       <Route path="/" element={<LandingPage />} />
@@ -309,7 +311,7 @@ export default function App() {
         path="/privacy-policy" 
         element={
           <PrivacyPolicy 
-            onBack={() => window.history.back()} 
+            onBack={() => navigate('/')} 
           />
         } 
       />
@@ -317,10 +319,14 @@ export default function App() {
         path="/terms-and-conditions" 
         element={
           <TermsAndConditions 
-            onBack={() => window.history.back()} 
+            onBack={() => navigate('/')} 
           />
         } 
       />
     </Routes>
   );
+}
+
+export default function App() {
+  return <AppRoutes />;
 }
