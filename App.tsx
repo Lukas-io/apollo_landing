@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { Routes, Route } from 'react-router-dom';
 import { Button } from './components/ui/button';
 import { Input } from './components/ui/input';
 import { PhoneScreen } from './components/PhoneScreen';
+import { PrivacyPolicy } from './components/PrivacyPolicy';
+import { TermsAndConditions } from './components/TermsAndConditions';
 import { Heart, ArrowUpRight, Rocket, CheckCircle, AlertCircle } from 'lucide-react';
 import { submitEmail } from './lib/supabase';
 
@@ -41,7 +44,7 @@ const CONFIG = {
   }
 };
 
-export default function App() {
+function LandingPage() {
   const [email, setEmail] = useState('');
   const [timeLeft, setTimeLeft] = useState({ days: 4, hours: 12, minutes: 34 }); // For phone screen
   const [launchCountdown, setLaunchCountdown] = useState({ days: 7, hours: 0, minutes: 0, seconds: 0 });
@@ -205,15 +208,34 @@ export default function App() {
          </form>
 
           {/* Footer */}
-          <a 
-            href={CONFIG.brand.socialUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`${theme.text.muted} flex items-center gap-2 hover:text-purple-400 transition-colors cursor-pointer group text-sm md:text-base justify-center md:justify-start`}
-          >
-            <span>Follow {CONFIG.brand.socialHandle} for updates</span>
-            <ArrowUpRight className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
-          </a>
+          <div className="space-y-3">
+            <a 
+              href={CONFIG.brand.socialUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`${theme.text.muted} flex items-center gap-2 hover:text-purple-400 transition-colors cursor-pointer group text-sm md:text-base justify-center md:justify-start`}
+            >
+              <span>Follow {CONFIG.brand.socialHandle} for updates</span>
+              <ArrowUpRight className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
+            </a>
+            
+            {/* Legal Links */}
+            <div className="flex items-center gap-4 text-xs md:text-sm justify-center md:justify-start">
+              <a 
+                href="/privacy-policy" 
+                className={`${theme.text.muted} hover:text-purple-400 transition-colors`}
+              >
+                Privacy Policy
+              </a>
+              <span className={`${theme.text.muted}`}>•</span>
+              <a 
+                href="/terms-and-conditions" 
+                className={`${theme.text.muted} hover:text-purple-400 transition-colors`}
+              >
+                Terms & Conditions
+              </a>
+            </div>
+          </div>
 
           {/* Status Message */}
           {submitStatus !== 'idle' && (
@@ -276,5 +298,29 @@ export default function App() {
         </main>
       </div>
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<LandingPage />} />
+      <Route 
+        path="/privacy-policy" 
+        element={
+          <PrivacyPolicy 
+            onBack={() => window.history.back()} 
+          />
+        } 
+      />
+      <Route 
+        path="/terms-and-conditions" 
+        element={
+          <TermsAndConditions 
+            onBack={() => window.history.back()} 
+          />
+        } 
+      />
+    </Routes>
   );
 }
