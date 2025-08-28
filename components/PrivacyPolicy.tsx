@@ -39,8 +39,8 @@ export function PrivacyPolicy({ onBack }: PrivacyPolicyProps) {
       // Send message to parent app
       window.parent.postMessage({ type: 'CLOSE_WEBVIEW' }, '*');
     } else {
-      // Fallback to window.close
-      window.close();
+      // Fallback to navigation back if not in webview
+      onBack();
     }
   };
 
