@@ -40,7 +40,7 @@ export function PrivacyPolicy({}: PrivacyPolicyProps) {
     >
       <div className="max-w-4xl mx-auto p-6 font-sans">
         {/* Header */}
-        <div className="flex items-center gap-5 mb-8 pt-6">
+        <div className="flex items-center justify-center md:justify-start gap-5 mb-8 pt-6">
           <div className="flex items-center gap-3">
             <img src={logoSrc} alt={CONFIG.brand.name} className="w-8 h-8 rounded-lg shadow-lg" />
             <span
