@@ -23,10 +23,10 @@ const CONFIG = {
 };
 
 interface TermsAndConditionsProps {
-  onBack: () => void;
+  // No props needed
 }
 
-export function TermsAndConditions({ onBack }: TermsAndConditionsProps) {
+export function TermsAndConditions({}: TermsAndConditionsProps) {
   const theme = CONFIG.colors.light;
   const brandGradient = CONFIG.gradients.brand;
   const logoSrc = '/logo.png';

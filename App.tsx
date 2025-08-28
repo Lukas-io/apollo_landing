@@ -309,19 +309,11 @@ function AppRoutes() {
       <Route path="/" element={<LandingPage />} />
       <Route 
         path="/privacy-policy" 
-        element={
-          <PrivacyPolicy 
-            onBack={() => navigate('/')} 
-          />
-        } 
+        element={<PrivacyPolicy />} 
       />
       <Route 
         path="/terms-and-conditions" 
-        element={
-          <TermsAndConditions 
-            onBack={() => navigate('/')} 
-          />
-        } 
+        element={<TermsAndConditions />} 
       />
     </Routes>
   );

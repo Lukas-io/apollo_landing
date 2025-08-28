@@ -23,10 +23,10 @@ const CONFIG = {
 };
 
 interface PrivacyPolicyProps {
-  onBack: () => void;
+  // No props needed
 }
 
-export function PrivacyPolicy({ onBack }: PrivacyPolicyProps) {
+export function PrivacyPolicy({}: PrivacyPolicyProps) {
   const theme = CONFIG.colors.light;
   const brandGradient = CONFIG.gradients.brand;
   const logoSrc = '/logo.png';
