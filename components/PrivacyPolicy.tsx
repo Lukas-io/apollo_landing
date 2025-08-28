@@ -1,6 +1,4 @@
 import React from 'react';
-import { ArrowLeft } from 'lucide-react';
-import { Button } from './ui/button';
 
 // Configuration object matching the main app
 const CONFIG = {
@@ -33,16 +31,7 @@ export function PrivacyPolicy({ onBack }: PrivacyPolicyProps) {
   const brandGradient = CONFIG.gradients.brand;
   const logoSrc = '/logo.png';
 
-  // Function to handle webview close
-  const handleWebviewClose = () => {
-    if (window.parent && window.parent !== window) {
-      // Send message to parent app
-      window.parent.postMessage({ type: 'CLOSE_WEBVIEW' }, '*');
-    } else {
-      // Fallback to navigation back if not in webview
-      onBack();
-    }
-  };
+
 
   return (
     <div 
@@ -52,16 +41,6 @@ export function PrivacyPolicy({ onBack }: PrivacyPolicyProps) {
       <div className="max-w-4xl mx-auto p-6 font-sans">
         {/* Header */}
         <div className="flex items-center gap-5 mb-8 pt-6">
-          <Button
-            onClick={handleWebviewClose}
-            variant="ghost"
-            size="sm"
-            className="flex items-center gap-2 hover:bg-gray-100 transition-colors"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            <span>Close</span>
-          </Button>
-          
           <div className="flex items-center gap-3">
             <img src={logoSrc} alt={CONFIG.brand.name} className="w-8 h-8 rounded-lg shadow-lg" />
             <span
