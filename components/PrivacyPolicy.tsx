@@ -33,6 +33,17 @@ export function PrivacyPolicy({ onBack }: PrivacyPolicyProps) {
   const brandGradient = CONFIG.gradients.brand;
   const logoSrc = '/logo.png';
 
+  // Function to handle webview close
+  const handleWebviewClose = () => {
+    if (window.parent && window.parent !== window) {
+      // Send message to parent app
+      window.parent.postMessage({ type: 'CLOSE_WEBVIEW' }, '*');
+    } else {
+      // Fallback to window.close
+      window.close();
+    }
+  };
+
   return (
     <div 
       className={`min-h-screen ${CONFIG.colors.light.rightSide} transition-colors duration-500`}
@@ -42,13 +53,13 @@ export function PrivacyPolicy({ onBack }: PrivacyPolicyProps) {
         {/* Header */}
         <div className="flex items-center gap-5 mb-8 pt-6">
           <Button
-            onClick={onBack}
+            onClick={handleWebviewClose}
             variant="ghost"
             size="sm"
             className="flex items-center gap-2 hover:bg-gray-100 transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
-            <span>Back</span>
+            <span>Close</span>
           </Button>
           
           <div className="flex items-center gap-3">
@@ -72,7 +83,7 @@ export function PrivacyPolicy({ onBack }: PrivacyPolicyProps) {
           </h1>
           
           <p className={`text-lg ${theme.text.secondary} mb-8`}>
-            Last updated: {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+            Last updated: August 28, 2025
           </p>
 
           <div className="prose prose-gray max-w-none">
